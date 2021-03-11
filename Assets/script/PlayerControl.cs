@@ -13,6 +13,9 @@ public class PlayerControl : MonoBehaviour {
     public GameObject Master;
 
     public bool canFire;
+    public bool sanshe;//散射开关
+    public bool fangshe;//放射开关
+    public bool lianshe;//连射开关
     public bool EndMode;
     public bool Isthis=false;
     public string Id;
@@ -104,8 +107,8 @@ public class PlayerControl : MonoBehaviour {
 
     private void PlayerCtrl(ref Vector3 move, ref Vector3 shoot)
     {
-        float y = Camera.main.transform.rotation.eulerAngles.y;
-        shoot = Quaternion.Euler(0, y, 0) * shoot;
+        float y = Camera.main.transform.rotation.eulerAngles.y;//这块是为了兼容3D模式做的处理，为了让shoot和moce只沿着水平面旋转
+        shoot = Quaternion.Euler(0, y, 0) * shoot;//沃日，前边的shoot是这个函数里的，后边的shoot应该是个全局变量；
         move = Quaternion.Euler(0, y, 0) * move;
 
         transform.Translate(move * Time.deltaTime * speed, Space.World);
@@ -127,6 +130,30 @@ public class PlayerControl : MonoBehaviour {
                 if (curTime - lastTime >= shoottime)
                 {
                     Instantiate(bullet, this.transform.position + transform.forward, this.transform.rotation);
+                    //在player下生成 
+                    //Instantiate(bullet, this.transform,true);
+                    lastTime = curTime;
+
+                }
+            }
+        }
+
+        if (sanshe)
+        {
+            curTime = Time.time;
+
+            if (shoot != Vector3.zero)
+            {
+                Quaternion rotation = Quaternion.LookRotation(Vector3.forward, shoot);//根据jkli定义面部朝向向量
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1);//用Slerp方法让主角转向上一步计算出的向量方向
+                Quaternion rotationL = Quaternion.LookRotation(Vector3.forward, shoot);
+
+
+                if (curTime - lastTime >= shoottime)
+                {
+                    Instantiate(bullet, this.transform.position + transform.forward, this.transform.rotation);
+                    Instantiate(bullet, this.transform.position + transform.right, this.transform.rotation*Quaternion.Euler(0,0,-30));
+                    Instantiate(bullet, this.transform.position - transform.right, this.transform.rotation * Quaternion.Euler(0, 0, 30));
                     //在player下生成 
                     //Instantiate(bullet, this.transform,true);
                     lastTime = curTime;
@@ -178,7 +205,7 @@ public class PlayerControl : MonoBehaviour {
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("SkillBox"))
         {
-            skill = other.
+            
         }
 
     }

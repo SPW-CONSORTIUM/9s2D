@@ -8,7 +8,7 @@ public class LuXian : MonoBehaviour {
     public float movespeed;
     public GameObject Ludian;
     public bool Loop;
-    public bool ZhuanXiang;
+    public bool ZhuanXiang;//转向
     int Jb = 0;
     Vector3 mubiao;
 
@@ -52,7 +52,7 @@ public class LuXian : MonoBehaviour {
             mubiao = mubiao.normalized;
             if(ZhuanXiang)
             {
-                Quaternion target = Quaternion.LookRotation(Vector3.forward, mubiao);
+                Quaternion target = Quaternion.LookRotation(Vector3.forward, mubiao);//朝向向量
                 transform.rotation = Quaternion.Slerp(transform.rotation, target, speedq);
                 transform.Translate(Vector3.up * movespeed);
             }

@@ -257,6 +257,9 @@ MonoBehaviour:
   BlackCore: {fileID: 1501135559508884, guid: 83e07b71abefa41de878940f2879a373, type: 2}
   Master: {fileID: 0}
   canFire: 0
+  sanshe: 1
+  fangshe: 0
+  lianshe: 0
   EndMode: 0
   Isthis: 1
   Id: 1
