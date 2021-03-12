@@ -23,8 +23,8 @@ GameObject:
   - component: {fileID: 61600083239044132}
   - component: {fileID: 50005905579108544}
   - component: {fileID: 114033551288666126}
-  m_Layer: 8
-  m_Name: bulletMe2D 1
+  m_Layer: 13
+  m_Name: bulletYou2D 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,6 +101,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShootSpeed: 10
   lifeTime: 10
+  Monster: 1
+  BulletYou: 1
+  BulletMe: 1
+  LuDian: 1
+  Player: 1
+  BlackCore: 1
+  SkillBox: 1
 --- !u!212 &212130802422220400
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -136,7 +143,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 65c5dd6e9f02a444687a5e9d57c1a0c2, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.88965523, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

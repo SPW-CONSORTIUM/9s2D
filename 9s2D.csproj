@@ -268,7 +268,10 @@
     <Compile Include="Assets\script\RedBoom.cs" />
     <Compile Include="Assets\script\RotatePlank.cs" />
     <Compile Include="Assets\script\Skill.cs" />
-    <Compile Include="Assets\script\SkillBox.cs" />
+    <Compile Include="Assets\script\Skill\HuanRaoSkill.cs" />
+    <Compile Include="Assets\script\Skill\SanSheSkill.cs" />
+    <Compile Include="Assets\script\Skill\SheSuUpSkill.cs" />
+    <Compile Include="Assets\script\Skill\SkillBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\README.txt" />

@@ -5,12 +5,13 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour {
     public float Hp; 
     public float speed;
-    public float shoottime;
+    public float shootimedelta;//射击间隔时间
     public float JuLi;
     public GameObject bullet1;
     public GameObject bullet2;
     public GameObject BlackCore;
     public GameObject Master;
+    public GameObject skill=null;//目前没啥用，以后可能用于存储
 
     public bool canFire;
     public bool sanshe;//散射开关
@@ -27,7 +28,6 @@ public class PlayerControl : MonoBehaviour {
     Vector2 centerR = Vector2.zero;
     Vector3 up=Vector3.up;
     GameObject bullet;
-    GameObject skill;
 
 
     // Use this for initialization
@@ -46,7 +46,6 @@ public class PlayerControl : MonoBehaviour {
         {
             Instantiate(BlackCore, this.transform.position + transform.forward, this.transform.rotation);
             Destroy(this.gameObject);
-            Debug.Log(JuLi);
         }
         if (Input.GetKeyDown(Id))
         {
@@ -127,7 +126,7 @@ public class PlayerControl : MonoBehaviour {
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1);
 
 
-                if (curTime - lastTime >= shoottime)
+                if (curTime - lastTime >= shootimedelta)
                 {
                     Instantiate(bullet, this.transform.position + transform.forward, this.transform.rotation);
                     //在player下生成 
@@ -149,7 +148,7 @@ public class PlayerControl : MonoBehaviour {
                 Quaternion rotationL = Quaternion.LookRotation(Vector3.forward, shoot);
 
 
-                if (curTime - lastTime >= shoottime)
+                if (curTime - lastTime >= shootimedelta)
                 {
                     Instantiate(bullet, this.transform.position + transform.forward, this.transform.rotation);
                     Instantiate(bullet, this.transform.position + transform.right, this.transform.rotation*Quaternion.Euler(0,0,-30));
@@ -203,10 +202,15 @@ public class PlayerControl : MonoBehaviour {
         {
             Hp = 0;
         }
-        if (other.gameObject.layer == LayerMask.NameToLayer("SkillBox"))
-        {
-            
-        }
 
+        //if (other.gameObject.layer == LayerMask.NameToLayer("SkillBox"))//判断碰撞对象标签
+        //{
+        //    GameObject boxSkill = other.gameObject.GetComponent<SkillBox>().skill;
+        //    if (skill != boxSkill)
+        //    {
+        //        skill = boxSkill;
+        //        Instantiate(skill, this.transform.position + transform.forward, this.transform.rotation, this.transform);
+        //    }
+        //}
     }
 }

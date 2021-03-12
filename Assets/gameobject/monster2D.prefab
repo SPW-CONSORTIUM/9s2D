@@ -38,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 1080198103338640}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.10000001, y: 0.10000001, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -76,7 +76,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 3.58, y: 7.67}
+  m_Size: {x: 0.34, y: 0.74}
   m_Direction: 0
 --- !u!114 &114889558609853116
 MonoBehaviour:
@@ -96,14 +96,14 @@ MonoBehaviour:
   LinesLong: 15
   LineCount: 50
   EscMax: 20
-  Player: {fileID: 0}
   m: 0.02
   Hp: 3
   Ludian: {fileID: 0}
   FenLieMode: 0
   Loop: 0
-  Monster: {fileID: 0}
+  canFindNPC: 0
   Find: 0
+  Monster: {fileID: 0}
 --- !u!212 &212721043816813724
 SpriteRenderer:
   m_ObjectHideFlags: 1

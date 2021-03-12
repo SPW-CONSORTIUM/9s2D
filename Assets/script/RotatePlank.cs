@@ -6,7 +6,7 @@ public class RotatePlank : MonoBehaviour
     public float rotateSpeed1;
     public float rotateSpeed2;
     [Header("The time of unidirectional rotation"), Range(0.1f, 100f)]
-    public float rotateTime = 0.5f;
+    public float rotateTime;
     public float idleTime;
     public bool isDoubleDirection = true;
 

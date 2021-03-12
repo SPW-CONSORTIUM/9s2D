@@ -7,9 +7,16 @@ public class BulletScript : MonoBehaviour {
     public float lifeTime;
     float curTime;
     float lastTime;
+    public bool Monster;
+    public bool BulletYou;
+    public bool BulletMe;
+    public bool LuDian;
+    public bool Player;
+    public bool BlackCore;
+    public bool SkillBox;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         lastTime = Time.time;
 	}
 	
@@ -31,10 +38,15 @@ public class BulletScript : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.layer!=LayerMask.NameToLayer("Monster")&&other.gameObject.layer != LayerMask.NameToLayer("BulletYou")&& other.gameObject.layer != LayerMask.NameToLayer("BulletMe")
-           && other.gameObject.layer != LayerMask.NameToLayer("LuDian")&&other.gameObject.layer != LayerMask.NameToLayer("Player")
-           &&other.gameObject.layer != LayerMask.NameToLayer("BlackCore"))
-           //不是以上名字的标签时才销毁
+        if (other.gameObject.layer!=LayerMask.NameToLayer("Monster")
+            &&other.gameObject.layer != LayerMask.NameToLayer("BulletYou")
+            && other.gameObject.layer != LayerMask.NameToLayer("BulletMe")
+           && other.gameObject.layer != LayerMask.NameToLayer("LuDian")
+           &&other.gameObject.layer != LayerMask.NameToLayer("Player")
+           &&other.gameObject.layer != LayerMask.NameToLayer("BlackCore") 
+           && other.gameObject.layer != LayerMask.NameToLayer("SkillBox")
+           )
+           //碰到以上标签不被销毁
         {
             Destroy(this.gameObject);
         }

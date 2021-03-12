@@ -231,6 +231,7 @@ MonoBehaviour:
   LookAtModeSwitch: 0
   YaoBaoModeSwitch: 0
   ModeUp: 0
+  onesMode: 0
   Box: []
   LinesLong: 20
   LinesCount: 1
