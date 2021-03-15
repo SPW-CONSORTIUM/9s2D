@@ -205,13 +205,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShootSpeed: 0
   lifeTime: 20
-  Monster: 1
-  BulletYou: 1
-  BulletMe: 1
-  LuDian: 1
-  Player: 1
-  BlackCore: 1
-  SkillBox: 1
+  Default: 0
+  BulletMe: 0
+  Player: 0
+  SkillBox: 0
+  RedBoom: 0
+  Monster: 0
+  BulletYou: 0
+  LuDian: 0
+  NPC: 0
+  BlackCore: 0
+  BlackBox: 0
 --- !u!114 &114899913836621248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -225,13 +229,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShootSpeed: 0
   lifeTime: 20
-  Monster: 1
-  BulletYou: 1
-  BulletMe: 1
-  LuDian: 1
-  Player: 1
-  BlackCore: 1
-  SkillBox: 1
+  Default: 0
+  BulletMe: 0
+  Player: 0
+  SkillBox: 0
+  RedBoom: 0
+  Monster: 0
+  BulletYou: 0
+  LuDian: 0
+  NPC: 0
+  BlackCore: 0
+  BlackBox: 0
 --- !u!212 &212228298142927380
 SpriteRenderer:
   m_ObjectHideFlags: 1

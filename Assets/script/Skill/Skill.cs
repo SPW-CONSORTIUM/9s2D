@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Skill : MonoBehaviour {
 
+	public GameObject bullet;
+
 	// Use this for initialization
 	void Start () {
 		

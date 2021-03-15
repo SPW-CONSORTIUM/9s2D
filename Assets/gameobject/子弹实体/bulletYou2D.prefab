@@ -99,15 +99,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7507aa3d58c39457da39523e9b32af9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShootSpeed: 8
-  lifeTime: 2
-  Monster: 1
-  BulletYou: 1
+  ShootSpeed: 4
+  lifeTime: 8
+  Default: 1
   BulletMe: 1
-  LuDian: 1
-  Player: 1
-  BlackCore: 1
-  SkillBox: 1
+  Player: 0
+  SkillBox: 0
+  RedBoom: 0
+  Monster: 0
+  BulletYou: 0
+  LuDian: 0
+  NPC: 0
+  BlackCore: 0
+  BlackBox: 1
 --- !u!212 &212130802422220400
 SpriteRenderer:
   m_ObjectHideFlags: 1

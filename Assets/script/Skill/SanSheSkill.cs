@@ -7,7 +7,7 @@ public class SanSheSkill : MonoBehaviour {
     public GameObject bullet;
     public float shootime;//射击持续时间
     public float ModeUptime;//模式开始时间
-    public bool ModeUp = false;//控制开始释放技能
+    public bool ModeUp = false;//技能启动开关
 
     float shootimedelta;//射击间隔时间
     bool timeCanFire = false;//控制是否在开火时间
@@ -26,8 +26,6 @@ public class SanSheSkill : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-
         if (ModeUp)
         {
             if (s)
@@ -35,18 +33,20 @@ public class SanSheSkill : MonoBehaviour {
                 startime = Time.time;
                 s = false;
             }
+            
             curTime = Time.time;
 
-            if (curTime - startime <= shootime&&curTime - lastTime >= shootimedelta)//计算时间间隔
+            if (curTime - lastTime >= shootimedelta)//计算时间间隔
             {
                 for (int i = 0; i < this.transform.childCount; i++)
                 {
                     Instantiate(bullet, this.transform.GetChild(i).position, this.transform.GetChild(i).rotation);
                 }
-
                 lastTime = curTime;
-
             }
+
+            if(curTime - startime >= shootime)
+                Destroy(this.gameObject);
         }
 
     }

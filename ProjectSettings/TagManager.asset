@@ -15,7 +15,7 @@ TagManager:
   - 
   - BulletMe
   - Player
-  - Plane
+  - SkillBox
   - RedBoom
   - Monster
   - BulletYou
@@ -23,7 +23,7 @@ TagManager:
   - NPC
   - BlackCore
   - BlackBox
-  - SkillBox
+  - 
   - 
   - 
   - 

@@ -265,12 +265,14 @@
     <Compile Include="Assets\script\PlayerControl.cs" />
     <Compile Include="Assets\script\Point.cs" />
     <Compile Include="Assets\script\RaycastController.cs" />
+    <Compile Include="Assets\script\RaySet.cs" />
     <Compile Include="Assets\script\RedBoom.cs" />
     <Compile Include="Assets\script\RotatePlank.cs" />
-    <Compile Include="Assets\script\Skill.cs" />
     <Compile Include="Assets\script\Skill\HuanRaoSkill.cs" />
+    <Compile Include="Assets\script\Skill\LianSheSkill.cs" />
     <Compile Include="Assets\script\Skill\SanSheSkill.cs" />
     <Compile Include="Assets\script\Skill\SheSuUpSkill.cs" />
+    <Compile Include="Assets\script\Skill\Skill.cs" />
     <Compile Include="Assets\script\Skill\SkillBox.cs" />
   </ItemGroup>
   <ItemGroup>

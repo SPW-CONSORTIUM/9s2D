@@ -101,13 +101,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShootSpeed: 8
   lifeTime: 10
+  Default: 1
+  BulletMe: 0
+  Player: 0
+  SkillBox: 0
+  RedBoom: 1
   Monster: 1
   BulletYou: 1
-  BulletMe: 1
-  LuDian: 1
-  Player: 1
-  BlackCore: 1
-  SkillBox: 1
+  LuDian: 0
+  NPC: 1
+  BlackCore: 0
+  BlackBox: 1
 --- !u!212 &212130802422220400
 SpriteRenderer:
   m_ObjectHideFlags: 1

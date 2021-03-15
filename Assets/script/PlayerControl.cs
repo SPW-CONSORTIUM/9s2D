@@ -6,20 +6,18 @@ public class PlayerControl : MonoBehaviour {
     public float Hp; 
     public float speed;
     public float shootimedelta;//射击间隔时间
-    public float JuLi;
+ //   public float escMax;//退出朝向跟随模式的距离
+    
     public GameObject bullet1;
     public GameObject bullet2;
     public GameObject BlackCore;
     public GameObject Master;
-    public GameObject skill=null;//目前没啥用，以后可能用于存储
 
     public bool canFire;
-    public bool sanshe;//散射开关
-    public bool fangshe;//放射开关
-    public bool lianshe;//连射开关
     public bool EndMode;
     public bool Isthis=false;
-    public string Id;
+    public bool autoMode = true;
+    
     bool EndModeUp;
     float lastTime;
     float curTime;
@@ -28,6 +26,8 @@ public class PlayerControl : MonoBehaviour {
     Vector2 centerR = Vector2.zero;
     Vector3 up=Vector3.up;
     GameObject bullet;
+    GameObject muBiao;
+    
 
 
     // Use this for initialization
@@ -47,15 +47,12 @@ public class PlayerControl : MonoBehaviour {
             Instantiate(BlackCore, this.transform.position + transform.forward, this.transform.rotation);
             Destroy(this.gameObject);
         }
-        if (Input.GetKeyDown(Id))
+        if (this.transform.GetComponent<RaySet>().muBiaoObj != null)
         {
-            Isthis = !Isthis;
-
-          //  Ray2D ray;
-          //  ray = new Ray2D(transform.position, (Master.transform.position - transform.position).normalized);
-
-        }
             
+        }
+        
+        
 
     }
 
@@ -65,51 +62,62 @@ public class PlayerControl : MonoBehaviour {
         Vector3 move,shoot;
         move = PCInput();
         shoot = PCShootInput();
-
-        if (Input.touchCount > 0)
-        {
-            for (int i=0;i< Input.touchCount;i++)
-            {
-                Touch touch = Input.touches[i];
-                if (touch.phase == TouchPhase.Began)
-                {
-                    lastTime = Time.time;
-                    center = touch.position;
-                }
-                if (center.x <= Screen.width / 2)
-                {
-                    centerL = center;
-                    move.x = touch.position.x - centerL.x;
-                    move.z = touch.position.y - centerL.y;
-                }
-                else
-                {
-                    centerR = center;
-                    shoot.x = touch.position.x - centerR.x;
-                    shoot.z = touch.position.y - centerR.y;
-                }
-            }
-
-        }
-
-        if(Isthis)
+        if (Isthis)
             PlayerCtrl(ref move, ref shoot);
+
+        /* if (Input.touchCount > 0)//尝试写触屏操作失败
+          {
+              for (int i=0;i< Input.touchCount;i++)
+              {
+                  Touch touch = Input.touches[i];
+                  if (touch.phase == TouchPhase.Began)
+                  {
+                      lastTime = Time.time;
+                      center = touch.position;
+                  }
+                  if (center.x <= Screen.width / 2)
+                  {
+                      centerL = center;
+                      move.x = touch.position.x - centerL.x;
+                      move.z = touch.position.y - centerL.y;
+                  }
+                  else
+                  {
+                      centerR = center;
+                      shoot.x = touch.position.x - centerR.x;
+                      shoot.z = touch.position.y - centerR.y;
+                  }
+              }
+
+          }
+        */
     }
 
-    private static Vector3 PCShootInput()
+    private Vector3 PCShootInput()
     {
-        float shootx = Input.GetAxis("Horizontal2");
-        float shooty = Input.GetAxis("Vertical2");
-        Vector3 shoot = new Vector3(shootx, shooty, 0);
-        return shoot;
+        Vector3 shoot;
+        if (autoMode&& this.transform.GetComponent<RaySet>().muBiaoObj!=null)
+        {
+            shoot = this.transform.GetComponent<RaySet>().muBiaoObj.transform.position - this.transform.position;
+            return shoot;
+        }
+
+        else
+        {
+            float shootx = Input.GetAxis("Horizontal2");
+            float shooty = Input.GetAxis("Vertical2");
+            shoot = new Vector3(shootx, shooty, 0);
+            return shoot;
+        }
+
     }
 
     private void PlayerCtrl(ref Vector3 move, ref Vector3 shoot)
     {
-        float y = Camera.main.transform.rotation.eulerAngles.y;//这块是为了兼容3D模式做的处理，为了让shoot和moce只沿着水平面旋转
-        shoot = Quaternion.Euler(0, y, 0) * shoot;//沃日，前边的shoot是这个函数里的，后边的shoot应该是个全局变量；
+        float y = Camera.main.transform.rotation.eulerAngles.y;
+        shoot = Quaternion.Euler(0, y, 0) * shoot;
         move = Quaternion.Euler(0, y, 0) * move;
-
+        //在3D模式下，使物体只在水平面旋转
         transform.Translate(move * Time.deltaTime * speed, Space.World);
         if(move!=Vector3.zero)
         {
@@ -117,50 +125,24 @@ public class PlayerControl : MonoBehaviour {
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1);
         }
 
-        if(canFire)
+            
+        if (shoot != Vector3.zero)
         {
+            Quaternion rotation = Quaternion.LookRotation(Vector3.forward, shoot);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1);
+
             curTime = Time.time;
-            if (shoot != Vector3.zero)
+
+            if (curTime - lastTime >= shootimedelta&&canFire)
             {
-                Quaternion rotation = Quaternion.LookRotation(Vector3.forward, shoot);
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1);
-
-
-                if (curTime - lastTime >= shootimedelta)
-                {
                     Instantiate(bullet, this.transform.position + transform.forward, this.transform.rotation);
                     //在player下生成 
                     //Instantiate(bullet, this.transform,true);
                     lastTime = curTime;
 
-                }
             }
         }
-
-        if (sanshe)
-        {
-            curTime = Time.time;
-
-            if (shoot != Vector3.zero)
-            {
-                Quaternion rotation = Quaternion.LookRotation(Vector3.forward, shoot);//根据jkli定义面部朝向向量
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1);//用Slerp方法让主角转向上一步计算出的向量方向
-                Quaternion rotationL = Quaternion.LookRotation(Vector3.forward, shoot);
-
-
-                if (curTime - lastTime >= shootimedelta)
-                {
-                    Instantiate(bullet, this.transform.position + transform.forward, this.transform.rotation);
-                    Instantiate(bullet, this.transform.position + transform.right, this.transform.rotation*Quaternion.Euler(0,0,-30));
-                    Instantiate(bullet, this.transform.position - transform.right, this.transform.rotation * Quaternion.Euler(0, 0, 30));
-                    //在player下生成 
-                    //Instantiate(bullet, this.transform,true);
-                    lastTime = curTime;
-
-                }
-            }
-        }
-
+        
 
 
     }
@@ -182,6 +164,8 @@ public class PlayerControl : MonoBehaviour {
         return move;
     }
 
+
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.layer==LayerMask.NameToLayer("BlackCore"))
@@ -194,7 +178,7 @@ public class PlayerControl : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("BulletYou"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("BulletYou")|| other.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
             Hp--;
         }
@@ -203,7 +187,8 @@ public class PlayerControl : MonoBehaviour {
             Hp = 0;
         }
 
-        //if (other.gameObject.layer == LayerMask.NameToLayer("SkillBox"))//判断碰撞对象标签
+
+        //if (other.gameObject.layer == LayerMask.NameToLayer("SkillBox"))//判断碰撞对象标签,这个已经移到skillbox里边去写了
         //{
         //    GameObject boxSkill = other.gameObject.GetComponent<SkillBox>().skill;
         //    if (skill != boxSkill)

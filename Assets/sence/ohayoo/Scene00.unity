@@ -8574,76 +8574,44 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4701831251052256, guid: d8d2f9e1394fd4624ad017e3677b1730, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -4.8691406
+      value: -6.02
       objectReference: {fileID: 0}
     - target: {fileID: 4701831251052256, guid: d8d2f9e1394fd4624ad017e3677b1730, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 5.313023
+      value: 4.72
       objectReference: {fileID: 0}
     - target: {fileID: 4701831251052256, guid: d8d2f9e1394fd4624ad017e3677b1730, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -3.2990532
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4701831251052256, guid: d8d2f9e1394fd4624ad017e3677b1730, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4701831251052256, guid: d8d2f9e1394fd4624ad017e3677b1730, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4701831251052256, guid: d8d2f9e1394fd4624ad017e3677b1730, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0.99999213
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4701831251052256, guid: d8d2f9e1394fd4624ad017e3677b1730, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.003967699
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4701831251052256, guid: d8d2f9e1394fd4624ad017e3677b1730, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1080198103338640, guid: d8d2f9e1394fd4624ad017e3677b1730, type: 2}
-      propertyPath: m_Name
-      value: monster2D (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4701831251052256, guid: d8d2f9e1394fd4624ad017e3677b1730, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -179.54501
       objectReference: {fileID: 0}
     - target: {fileID: 114889558609853116, guid: d8d2f9e1394fd4624ad017e3677b1730,
         type: 2}
       propertyPath: Ludian
       value: 
       objectReference: {fileID: 2091850376}
-    - target: {fileID: 114889558609853116, guid: d8d2f9e1394fd4624ad017e3677b1730,
-        type: 2}
-      propertyPath: Player
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114889558609853116, guid: d8d2f9e1394fd4624ad017e3677b1730,
-        type: 2}
-      propertyPath: Loop
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 50728263515912722, guid: d8d2f9e1394fd4624ad017e3677b1730,
-        type: 2}
-      propertyPath: m_Constraints
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 50728263515912722, guid: d8d2f9e1394fd4624ad017e3677b1730,
-        type: 2}
-      propertyPath: m_Mass
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4701831251052256, guid: d8d2f9e1394fd4624ad017e3677b1730, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.10000005
-      objectReference: {fileID: 0}
-    - target: {fileID: 4701831251052256, guid: d8d2f9e1394fd4624ad017e3677b1730, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.10000005
+    - target: {fileID: 1080198103338640, guid: d8d2f9e1394fd4624ad017e3677b1730, type: 2}
+      propertyPath: m_Name
+      value: monster2D (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d8d2f9e1394fd4624ad017e3677b1730, type: 2}

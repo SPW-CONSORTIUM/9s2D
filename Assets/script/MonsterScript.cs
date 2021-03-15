@@ -11,7 +11,7 @@ public class MonsterScript : MonoBehaviour {
     public int LineCount;
     public float EscMax;
 
-    public float m = 0.05f;//射线密度
+    public float m = 0.02f;//射线密度
     public int Hp;
     public GameObject Ludian;
     public bool FenLieMode;
@@ -20,8 +20,6 @@ public class MonsterScript : MonoBehaviour {
     public bool Find;
     public GameObject Monster;
 
-
-    private LineRenderer reader;
     private RaycastHit2D[] hit;
     private Ray2D[] ray;
 
@@ -29,8 +27,6 @@ public class MonsterScript : MonoBehaviour {
     float lastTime;
     float curTime;
 
-    bool Noflee;
-    bool DaoDa = true;
     int Jb=0;
     Vector3 mubiao;
 
@@ -132,7 +128,6 @@ public class MonsterScript : MonoBehaviour {
         if (other.gameObject.layer == LayerMask.NameToLayer("BulletMe"))
         {
             Hp--;
-            Destroy(other.gameObject);
         }
 
         if(other.gameObject.layer==LayerMask.NameToLayer("LuDian")&& other.transform.parent.name == Ludian.name)

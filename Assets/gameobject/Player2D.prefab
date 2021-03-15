@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4126045325723274}
   - component: {fileID: 212490098990604836}
+  - component: {fileID: 114262806632008860}
   - component: {fileID: 114976114986408132}
   - component: {fileID: 114791200456569528}
   - component: {fileID: 50925397831792960}
@@ -79,6 +80,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.33, y: 0.75}
   m_Direction: 0
+--- !u!114 &114262806632008860
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1702635874195960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d6bee9af40cf4f7f9b22757bf193f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LinesLong: 3
+  LineCount: 50
+  Layer: Monster
+  muBiaoObj: {fileID: 0}
+  escMax: 5
 --- !u!114 &114791200456569528
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,21 +119,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hp: 1
-  speed: 3
+  speed: 2.5
   shootimedelta: 0.8
-  JuLi: 0
   bullet1: {fileID: 1847331349650766, guid: f53cb49ab75af42de851111cfdbcf635, type: 2}
-  bullet2: {fileID: 1847331349650766, guid: a34d56f8f93be418f96d7e2297c5eb46, type: 2}
-  BlackCore: {fileID: 1501135559508884, guid: 83e07b71abefa41de878940f2879a373, type: 2}
+  bullet2: {fileID: 1847331349650766, guid: e67d190073c794cc6b1e4e50bf9fc46c, type: 2}
+  BlackCore: {fileID: 1501135559508884, guid: d8cf1f3ae10de400cafc4240fefb8274, type: 2}
   Master: {fileID: 0}
   skill: {fileID: 0}
   canFire: 0
-  sanshe: 0
-  fangshe: 0
-  lianshe: 0
   EndMode: 0
   Isthis: 1
-  Id: 1
+  autoMode: 1
 --- !u!212 &212490098990604836
 SpriteRenderer:
   m_ObjectHideFlags: 1

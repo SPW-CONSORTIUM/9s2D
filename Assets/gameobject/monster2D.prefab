@@ -100,7 +100,7 @@ MonoBehaviour:
   Hp: 3
   Ludian: {fileID: 0}
   FenLieMode: 0
-  Loop: 0
+  Loop: 1
   canFindNPC: 0
   Find: 0
   Monster: {fileID: 0}
