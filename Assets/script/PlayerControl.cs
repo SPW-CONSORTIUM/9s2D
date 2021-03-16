@@ -21,9 +21,7 @@ public class PlayerControl : MonoBehaviour {
     bool EndModeUp;
     float lastTime;
     float curTime;
-    Vector2 center = Vector2.zero;
-    Vector2 centerL = Vector2.zero;
-    Vector2 centerR = Vector2.zero;
+
     Vector3 up=Vector3.up;
     GameObject bullet;
     GameObject muBiao;
@@ -42,7 +40,7 @@ public class PlayerControl : MonoBehaviour {
 	// Update is called once per frame
     void Update()
     {
-        if (Hp <= 0/*|| Vector3.Distance(transform.position,Master.transform.position)>JuLi*/)
+        if (Hp <= 0)
         {
             Instantiate(BlackCore, this.transform.position + transform.forward, this.transform.rotation);
             Destroy(this.gameObject);
@@ -64,33 +62,6 @@ public class PlayerControl : MonoBehaviour {
         shoot = PCShootInput();
         if (Isthis)
             PlayerCtrl(ref move, ref shoot);
-
-        /* if (Input.touchCount > 0)//尝试写触屏操作失败
-          {
-              for (int i=0;i< Input.touchCount;i++)
-              {
-                  Touch touch = Input.touches[i];
-                  if (touch.phase == TouchPhase.Began)
-                  {
-                      lastTime = Time.time;
-                      center = touch.position;
-                  }
-                  if (center.x <= Screen.width / 2)
-                  {
-                      centerL = center;
-                      move.x = touch.position.x - centerL.x;
-                      move.z = touch.position.y - centerL.y;
-                  }
-                  else
-                  {
-                      centerR = center;
-                      shoot.x = touch.position.x - centerR.x;
-                      shoot.z = touch.position.y - centerR.y;
-                  }
-              }
-
-          }
-        */
     }
 
     private Vector3 PCShootInput()
@@ -121,14 +92,14 @@ public class PlayerControl : MonoBehaviour {
         transform.Translate(move * Time.deltaTime * speed, Space.World);
         if(move!=Vector3.zero)
         {
-            Quaternion rotation = Quaternion.LookRotation(Vector3.forward, move);
+            Quaternion rotation = Quaternion.LookRotation(move, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1);
         }
 
             
         if (shoot != Vector3.zero)
         {
-            Quaternion rotation = Quaternion.LookRotation(Vector3.forward, shoot);
+            Quaternion rotation = Quaternion.LookRotation(shoot, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1);
 
             curTime = Time.time;
@@ -150,7 +121,7 @@ public class PlayerControl : MonoBehaviour {
     private Vector3 PCInput()
     {
         Vector3 move;
-        float movex, movey;
+        float movex, movez;
         if (EndMode&&EndModeUp)
         {
             movex = 2;
@@ -159,8 +130,8 @@ public class PlayerControl : MonoBehaviour {
             
         else
             movex = Input.GetAxis("Horizontal");
-        movey = Input.GetAxis("Vertical");
-        move = new Vector3(movex, movey, 0);
+        movez = Input.GetAxis("Vertical");
+        move = new Vector3(movex, 0, movez);
         return move;
     }
 

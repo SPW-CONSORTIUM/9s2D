@@ -11,16 +11,18 @@ public class RaySet : MonoBehaviour {
     public float escMax;//目标丢失距离
 
 
-    float m = 0.05f;//射线密度
+    public float m = 0.03f;//射线密度
+    public float h = 0.5f;//射线高度（重心到头顶间的位置）
 
-    private RaycastHit2D[] hit;
-    private Ray2D[] ray;
+
+    private RaycastHit[] hit;
+    private Ray[] ray;
     Vector3 muBiao;
 
     // Use this for initialization
     void Start () {
-        ray = new Ray2D[LineCount];
-        hit = new RaycastHit2D[LineCount];
+        ray = new Ray[LineCount];
+        hit = new RaycastHit[LineCount];
     }
 	
 	// Update is called once per frame
@@ -40,16 +42,16 @@ public class RaySet : MonoBehaviour {
             {
                 if (i < 35)
                 {
-                    ray[i] = new Ray2D(transform.position, Vector3.Lerp(this.transform.up, this.transform.right, i * m).normalized * LinesLong);
-                    hit[i] = Physics2D.Raycast(transform.position + transform.up, Vector3.Lerp(this.transform.up, this.transform.right, i * m), LinesLong);
-                    Debug.DrawRay(transform.position, Vector3.Lerp(this.transform.up, this.transform.right, i * m).normalized * LinesLong, Color.blue);
+                    ray[i] = new Ray(transform.position + transform.up*h, Vector3.Lerp(this.transform.forward, this.transform.right, i * m).normalized * LinesLong);
+                    Physics.Raycast(transform.position, Vector3.Lerp(this.transform.forward, this.transform.right, i * m), out hit[i],LinesLong);
+                    Debug.DrawRay(transform.position+transform.up * h, Vector3.Lerp(this.transform.forward, this.transform.right, i * m).normalized * LinesLong, Color.blue);
                 }
 
                 else
                 {
-                    ray[i] = new Ray2D(transform.position, Vector3.Lerp(this.transform.up, this.transform.right, i * m).normalized * LinesLong * 0.1f);
-                    hit[i] = Physics2D.Raycast(transform.position + transform.up, Vector3.Lerp(this.transform.up, this.transform.right, i * m), LinesLong * 0.1f);
-                    Debug.DrawRay(transform.position, Vector3.Lerp(this.transform.up, this.transform.right, i * m).normalized * LinesLong * 0.1f, Color.yellow);
+                    ray[i] = new Ray(transform.position + transform.up * h, Vector3.Lerp(this.transform.forward, this.transform.right, i * m).normalized * LinesLong * 0.1f);
+                    Physics.Raycast(transform.position + transform.forward, Vector3.Lerp(this.transform.forward, this.transform.right, i * m), out hit[i],LinesLong * 0.1f);
+                    Debug.DrawRay(transform.position + transform.up * h, Vector3.Lerp(this.transform.forward, this.transform.right, i * m).normalized * LinesLong * 0.1f, Color.yellow);
                 }
             }
 
@@ -57,16 +59,16 @@ public class RaySet : MonoBehaviour {
             {
                 if (i <= 35)
                 {
-                    ray[i] = new Ray2D(transform.position, Vector3.Lerp(this.transform.up, -this.transform.right, i * m).normalized * LinesLong);
-                    hit[i] = Physics2D.Raycast(transform.position + transform.up, Vector3.Lerp(this.transform.up, -this.transform.right, i * m), LinesLong);
-                    Debug.DrawRay(transform.position, Vector3.Lerp(this.transform.up, -this.transform.right, i * m).normalized * LinesLong, Color.green);
+                    ray[i] = new Ray(transform.position + transform.up * h, Vector3.Lerp(this.transform.forward, -this.transform.right, i * m).normalized * LinesLong);
+                    Physics.Raycast(transform.position + transform.forward, Vector3.Lerp(this.transform.forward, -this.transform.right, i * m), out hit[i], LinesLong);
+                    Debug.DrawRay(transform.position + transform.up * h, Vector3.Lerp(this.transform.forward, -this.transform.right, i * m).normalized * LinesLong, Color.blue);
                 }
 
                 else
                 {
-                    ray[i] = new Ray2D(transform.position, Vector3.Lerp(this.transform.up, -this.transform.right, i * m).normalized * LinesLong * 0.1f);
-                    hit[i] = Physics2D.Raycast(transform.position + transform.up, Vector3.Lerp(this.transform.up, -this.transform.right, i * m), LinesLong * 0.1f);
-                    Debug.DrawRay(transform.position, Vector3.Lerp(this.transform.up, -this.transform.right, i * m).normalized * LinesLong * 0.1f, Color.yellow);
+                    ray[i] = new Ray(transform.position + transform.up * h, Vector3.Lerp(this.transform.forward, -this.transform.right, i * m).normalized * LinesLong * 0.1f);
+                    Physics.Raycast(transform.position + transform.forward, Vector3.Lerp(this.transform.forward, -this.transform.right, i * m), out hit[i], LinesLong * 0.1f);
+                    Debug.DrawRay(transform.position + transform.up * h, Vector3.Lerp(this.transform.forward, -this.transform.right, i * m).normalized * LinesLong * 0.1f, Color.yellow);
                 }
             }
 
