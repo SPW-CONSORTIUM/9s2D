@@ -13,6 +13,7 @@ public class PlayerControl : MonoBehaviour {
     public GameObject BlackCore;
     public GameObject Master;
 
+    public bool Ishoot;//是否有shoot向量；用于开启技能
     public bool canFire;
     public bool EndMode;
     public bool Isthis=false;
@@ -49,9 +50,6 @@ public class PlayerControl : MonoBehaviour {
         {
             
         }
-        
-        
-
     }
 
     void FixedUpdate ()
@@ -60,6 +58,10 @@ public class PlayerControl : MonoBehaviour {
         Vector3 move,shoot;
         move = PCInput();
         shoot = PCShootInput();
+        if (shoot != Vector3.zero)
+            Ishoot = true;
+        else
+            Ishoot = false;
         if (Isthis)
             PlayerCtrl(ref move, ref shoot);
     }
@@ -76,8 +78,8 @@ public class PlayerControl : MonoBehaviour {
         else
         {
             float shootx = Input.GetAxis("Horizontal2");
-            float shooty = Input.GetAxis("Vertical2");
-            shoot = new Vector3(shootx, shooty, 0);
+            float shootz = Input.GetAxis("Vertical2");
+            shoot = new Vector3(shootx, 0, shootz);
             return shoot;
         }
 

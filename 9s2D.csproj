@@ -252,6 +252,7 @@
     <Compile Include="Assets\script\BulletScript.cs" />
     <Compile Include="Assets\script\CameraControl.cs" />
     <Compile Include="Assets\script\CameraTransform.cs" />
+    <Compile Include="Assets\script\Hand.cs" />
     <Compile Include="Assets\script\LoadSence.cs" />
     <Compile Include="Assets\script\LoadSenceTwo.cs" />
     <Compile Include="Assets\script\LuXian.cs" />
@@ -268,6 +269,7 @@
     <Compile Include="Assets\script\RaySet.cs" />
     <Compile Include="Assets\script\RedBoom.cs" />
     <Compile Include="Assets\script\RotatePlank.cs" />
+    <Compile Include="Assets\script\SanJiaoChi.cs" />
     <Compile Include="Assets\script\Skill\HuanRaoSkill.cs" />
     <Compile Include="Assets\script\Skill\LianSheSkill.cs" />
     <Compile Include="Assets\script\Skill\SanSheSkill.cs" />

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour {
-    public float ShootSpeed;
-    public float lifeTime;
+    public float ShootSpeed;//子弹飞行速度
+    public float lifeTime;//子弹存活时间
     float curTime;
     float lastTime;
 
@@ -33,16 +33,18 @@ public class BulletScript : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        transform.Translate(Vector3.up * ShootSpeed * Time.deltaTime);
-        curTime = Time.time;
-        if (curTime - lastTime >= lifeTime)
-        {
-            Destroy(this.gameObject);
-            lastTime  = curTime;
-        }
+        transform.Translate(Vector3.forward * ShootSpeed * Time.deltaTime);//子弹飞行函数
+            curTime = Time.time;
+            if (curTime - lastTime >= lifeTime)
+            {
+                Destroy(this.gameObject);
+                lastTime = curTime;
+            }
+
+        
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter(Collider other)
     {//遇到一下标签删除自己
         if (Default && other.gameObject.layer == LayerMask.NameToLayer("Default"))
             Destroy(this.gameObject);
