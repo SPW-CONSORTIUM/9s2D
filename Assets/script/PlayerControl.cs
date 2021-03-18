@@ -12,6 +12,7 @@ public class PlayerControl : MonoBehaviour {
     public GameObject bullet2;
     public GameObject BlackCore;
     public GameObject Master;
+    public float f;//力的系数
 
     public bool Ishoot;//是否有shoot向量；用于开启技能
     public bool canFire;
@@ -90,15 +91,18 @@ public class PlayerControl : MonoBehaviour {
         float y = Camera.main.transform.rotation.eulerAngles.y;
         shoot = Quaternion.Euler(0, y, 0) * shoot;
         move = Quaternion.Euler(0, y, 0) * move;
-        //在3D模式下，使物体只在水平面旋转
-        transform.Translate(move * Time.deltaTime * speed, Space.World);
-        if(move!=Vector3.zero)
-        {
-            Quaternion rotation = Quaternion.LookRotation(move, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1);
-        }
 
-            
+        //在3D模式下，使物体只在水平面旋转
+        //transform.Translate(move * Time.deltaTime * speed, Space.World);//位移驱动
+        this.transform.Find("Foot").GetComponent<Rigidbody>().AddForce(move*f, ForceMode.Acceleration);
+        this.transform.Find("Foot").GetComponent<Rigidbody>().AddTorque(move * f, ForceMode.Acceleration);
+        //if(move!=Vector3.zero)
+        //{
+        //    Quaternion rotation = Quaternion.LookRotation(move, Vector3.up);
+        //    transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1);
+        //}
+
+
         if (shoot != Vector3.zero)
         {
             Quaternion rotation = Quaternion.LookRotation(shoot, Vector3.up);
@@ -134,6 +138,7 @@ public class PlayerControl : MonoBehaviour {
             movex = Input.GetAxis("Horizontal");
         movez = Input.GetAxis("Vertical");
         move = new Vector3(movex, 0, movez);
+
         return move;
     }
 
