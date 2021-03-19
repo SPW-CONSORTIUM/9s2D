@@ -7,11 +7,10 @@ public class MonsterScript : MonoBehaviour {
     public float speedq;
     public GameObject bullet;
     public float shootTime;
-    public float LinesLong;
-    public int LineCount;
+
     public float EscMax;
 
-    public float m = 0.02f;//射线密度
+
     public int Hp;
     public GameObject Ludian;
     public bool FenLieMode;
@@ -20,8 +19,8 @@ public class MonsterScript : MonoBehaviour {
     public bool Find;
     public GameObject Monster;
 
-    private RaycastHit2D[] hit;
-    private Ray2D[] ray;
+    private RaycastHit[] hit;
+    private Ray[] ray;
 
     GameObject Player;
     float lastTime;
@@ -41,20 +40,31 @@ public class MonsterScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         lastTime = Time.time;
-        ray = new Ray2D[LineCount];
-        hit = new RaycastHit2D[LineCount];
-        Player = GameObject.Find("Player2D");
+
+        Player = GameObject.Find("Player");
 		
 	}
 
-
-
-
-	
 	// Update is called once per frame
 	void Update ()
     {
-        RaySet();
+
+        if (this.transform.GetComponent<RaySet>().muBiaoObj != null)
+        {
+            Find = true;
+            Player = this.transform.GetComponent<RaySet>().muBiaoObj;
+            if (this.transform.parent != null)
+            {
+                MonsterScript[] Monsters;
+                Monsters = this.transform.parent.gameObject.GetComponentsInChildren<MonsterScript>();
+                for (int t = 0; t < Monsters.Length; t++)
+                {
+                    if (!Monsters[t].Find)
+                        Monsters[t].Find = true;
+                }
+            }
+        }
+
         if (Hp <= 0)
         {
             if (FenLieMode)
@@ -72,9 +82,6 @@ public class MonsterScript : MonoBehaviour {
                 Destroy(this.gameObject);
             }
         }
-
-
-
     }
 
     private void FixedUpdate()
@@ -123,7 +130,7 @@ public class MonsterScript : MonoBehaviour {
     }
 
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("BulletMe"))
         {
@@ -148,76 +155,6 @@ public class MonsterScript : MonoBehaviour {
         
         }
 
-    }
-
-
-    private void RaySet()
-    {
-        for (int i = 0; i < ray.Length; i++)
-        {
-            
-            if ((i % 2) == 0)
-            {
-                if(i<35)
-                {
-                    ray[i] = new Ray2D(transform.position, Vector3.Lerp(this.transform.up, this.transform.right, i * m).normalized * LinesLong);
-                    hit[i] = Physics2D.Raycast(transform.position + transform.up, Vector3.Lerp(this.transform.up, this.transform.right, i * m), LinesLong);
-                    Debug.DrawRay(transform.position, Vector3.Lerp(this.transform.up, this.transform.right, i * m).normalized * LinesLong, Color.blue);
-                }
-
-                else
-                {
-                    ray[i] = new Ray2D(transform.position, Vector3.Lerp(this.transform.up, this.transform.right, i * m).normalized * LinesLong*0.1f);
-                    hit[i] = Physics2D.Raycast(transform.position + transform.up, Vector3.Lerp(this.transform.up, this.transform.right, i * m), LinesLong*0.1f);
-                    Debug.DrawRay(transform.position, Vector3.Lerp(this.transform.up, this.transform.right, i * m).normalized * LinesLong*0.1f, Color.yellow);
-                }
-            }
-
-            if ((i % 2) == 1)
-            {
-                if(i<=35)
-                {
-                    ray[i] = new Ray2D(transform.position, Vector3.Lerp(this.transform.up, -this.transform.right, i * m).normalized * LinesLong);
-                    hit[i] = Physics2D.Raycast(transform.position + transform.up, Vector3.Lerp(this.transform.up, -this.transform.right, i * m), LinesLong);
-                    Debug.DrawRay(transform.position, Vector3.Lerp(this.transform.up, -this.transform.right, i * m).normalized * LinesLong, Color.green);
-                }
-
-                else
-                {
-                    ray[i] = new Ray2D(transform.position, Vector3.Lerp(this.transform.up, -this.transform.right, i * m).normalized * LinesLong*0.1f);
-                    hit[i] = Physics2D.Raycast(transform.position + transform.up, Vector3.Lerp(this.transform.up, -this.transform.right, i * m), LinesLong*0.1f);
-                    Debug.DrawRay(transform.position, Vector3.Lerp(this.transform.up, -this.transform.right, i * m).normalized * LinesLong*0.1f, Color.yellow);
-                }
-            }
-
-            if (hit[i].collider != null)
-            {
-                //Debug.Log(hit[i].collider.gameObject);
-                if (hit[i].collider.gameObject.layer == LayerMask.NameToLayer("Player"))
-                {
-                    Find = true;
-                    Player = hit[i].collider.gameObject;
-                    if (this.transform.parent != null)
-                    {
-                        MonsterScript[] Monsters;
-                        Monsters = this.transform.parent.gameObject.GetComponentsInChildren<MonsterScript>();
-                        for (int t = 0; t < Monsters.Length; t++)
-                        {
-                            if (!Monsters[t].Find)
-                                Monsters[t].Find = true;
-                        }
-                    }
-                }
-
-                else if(hit[i].collider.gameObject.layer == LayerMask.NameToLayer("NPC")&&canFindNPC)
-                {
-                    Find = true;
-                    Player = hit[i].collider.gameObject;
-                }
-            }
-
-
-         }
     }
 
     private void Follow()
@@ -250,16 +187,12 @@ public class MonsterScript : MonoBehaviour {
 
     private void MonsterAct()
     {
-        Quaternion target = Quaternion.LookRotation(Vector3.forward, mubiao);
+        Quaternion target = Quaternion.LookRotation(mubiao, Vector3.up);
         transform.rotation = Quaternion.Slerp(transform.rotation, target, speedq);
-        transform.Translate(Vector3.up * movespeed);
+        transform.Translate(Vector3.forward * movespeed);
     }
 
-
-
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("RedBoom"))
         {
