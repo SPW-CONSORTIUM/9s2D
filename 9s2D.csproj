@@ -237,6 +237,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Force.cs" />
     <Compile Include="Assets\Line\scr\XLine.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\CameraControls.cs" />
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\IcoBumpin.cs" />
@@ -270,6 +271,7 @@
     <Compile Include="Assets\script\RedBoom.cs" />
     <Compile Include="Assets\script\RotatePlank.cs" />
     <Compile Include="Assets\script\SanJiaoChi.cs" />
+    <Compile Include="Assets\script\Skill\BanerZhuan.cs" />
     <Compile Include="Assets\script\Skill\HuanRaoSkill.cs" />
     <Compile Include="Assets\script\Skill\LianSheSkill.cs" />
     <Compile Include="Assets\script\Skill\SanSheSkill.cs" />

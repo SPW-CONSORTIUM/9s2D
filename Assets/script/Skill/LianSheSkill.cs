@@ -21,7 +21,7 @@ public class LianSheSkill : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (this.transform.parent != null&&this.transform.GetComponentInParent<PlayerControl>().Ishoot)
+        if (this.transform.parent != null&&this.transform.GetComponentInParent<PlayerControl>().shoot!=Vector3.zero)
         {
             ModeUp = true;
         }

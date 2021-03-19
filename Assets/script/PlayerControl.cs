@@ -13,8 +13,8 @@ public class PlayerControl : MonoBehaviour {
     public GameObject BlackCore;
     public GameObject Master;
     public float f;//力的系数
+    public Vector3 move, shoot;
 
-    public bool Ishoot;//是否有shoot向量；用于开启技能
     public bool canFire;
     public bool EndMode;
     public bool Isthis=false;
@@ -56,13 +56,9 @@ public class PlayerControl : MonoBehaviour {
     void FixedUpdate ()
     {
 
-        Vector3 move,shoot;
+        
         move = PCInput();
         shoot = PCShootInput();
-        if (shoot != Vector3.zero)
-            Ishoot = true;
-        else
-            Ishoot = false;
         if (Isthis)
             PlayerCtrl(ref move, ref shoot);
     }
@@ -88,14 +84,16 @@ public class PlayerControl : MonoBehaviour {
 
     private void PlayerCtrl(ref Vector3 move, ref Vector3 shoot)
     {
+        //在3D模式下，使物体只在水平面旋转
         float y = Camera.main.transform.rotation.eulerAngles.y;
         shoot = Quaternion.Euler(0, y, 0) * shoot;
         move = Quaternion.Euler(0, y, 0) * move;
 
-        //在3D模式下，使物体只在水平面旋转
+        
         //transform.Translate(move * Time.deltaTime * speed, Space.World);//位移驱动
         this.transform.Find("Foot").GetComponent<Rigidbody>().AddForce(move*f, ForceMode.Acceleration);
-        this.transform.Find("Foot").GetComponent<Rigidbody>().AddTorque(move * f, ForceMode.Acceleration);
+        //this.transform.Find("Foot").GetComponent<Rigidbody>().AddTorque(move * f, ForceMode.Acceleration);//试图添加朝向目标的扭矩，但没有效果，之后再做尝试
+        //判断移动时，同时改变面部朝向，使角色能够面向前方行走
         //if(move!=Vector3.zero)
         //{
         //    Quaternion rotation = Quaternion.LookRotation(move, Vector3.up);
@@ -105,15 +103,16 @@ public class PlayerControl : MonoBehaviour {
 
         if (shoot != Vector3.zero)
         {
-            Quaternion rotation = Quaternion.LookRotation(shoot, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1);
+            //改变角色面向方向
+            //Quaternion rotation = Quaternion.LookRotation(shoot, Vector3.up);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1);
 
             curTime = Time.time;
 
             if (curTime - lastTime >= shootimedelta&&canFire)
             {
                     Instantiate(bullet, this.transform.position + transform.forward, this.transform.rotation);
-                    //在player下生成 
+                    //在player下生成子弹
                     //Instantiate(bullet, this.transform,true);
                     lastTime = curTime;
 
