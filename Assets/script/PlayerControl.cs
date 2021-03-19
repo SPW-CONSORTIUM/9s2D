@@ -33,9 +33,6 @@ public class PlayerControl : MonoBehaviour {
     // Use this for initialization
     void Start () {
         Input.multiTouchEnabled = true;
-        lastTime = Time.time;
-        //canFire = false;
-        bullet = bullet1;
         
 	}
 	
@@ -55,8 +52,6 @@ public class PlayerControl : MonoBehaviour {
 
     void FixedUpdate ()
     {
-
-        
         move = PCInput();
         shoot = PCShootInput();
         if (Isthis)
@@ -106,17 +101,6 @@ public class PlayerControl : MonoBehaviour {
             //改变角色面向方向
             //Quaternion rotation = Quaternion.LookRotation(shoot, Vector3.up);
             //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1);
-
-            curTime = Time.time;
-
-            if (curTime - lastTime >= shootimedelta&&canFire)
-            {
-                    Instantiate(bullet, this.transform.position + transform.forward, this.transform.rotation);
-                    //在player下生成子弹
-                    //Instantiate(bullet, this.transform,true);
-                    lastTime = curTime;
-
-            }
         }
         
 
@@ -163,16 +147,5 @@ public class PlayerControl : MonoBehaviour {
         {
             Hp = 0;
         }
-
-
-        //if (other.gameObject.layer == LayerMask.NameToLayer("SkillBox"))//判断碰撞对象标签,这个已经移到skillbox里边去写了
-        //{
-        //    GameObject boxSkill = other.gameObject.GetComponent<SkillBox>().skill;
-        //    if (skill != boxSkill)
-        //    {
-        //        skill = boxSkill;
-        //        Instantiate(skill, this.transform.position + transform.forward, this.transform.rotation, this.transform);
-        //    }
-        //}
     }
 }

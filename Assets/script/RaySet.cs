@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//该脚本用于射线检索目标
 public class RaySet : MonoBehaviour {
 
     public float LinesLong;
