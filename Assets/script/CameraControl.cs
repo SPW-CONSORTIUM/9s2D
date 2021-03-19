@@ -15,16 +15,22 @@ public class CameraControl : MonoBehaviour {
     float movex, movez;
 	// Use this for initialization
 	void Start () {
-        
+        this.transform.position = Player1.transform.position + campos;
 	}
 	
 	// Update is called once per frame
     void FixedUpdate ()
     {
         //PlayersCtrl();
-        //GuDingRota();
-        //flowPlayer();
-        if(Player1==null)
+        GuDingRota();
+        flowPlayer();
+        //CamEndMode2D();
+
+    }
+
+    private void CamEndMode2D()//原2D玩法的摄像机方法
+    {
+        if (Player1 == null)
         {
             Destroy(this);
         }
@@ -38,7 +44,6 @@ public class CameraControl : MonoBehaviour {
 
             transform.RotateAround(Player1.transform.position, Vector3.up, speedq * Time.deltaTime * r);
         }
-
     }
 
     private void flowPlayer()//与玩家同步运动
