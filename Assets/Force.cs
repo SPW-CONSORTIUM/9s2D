@@ -25,7 +25,7 @@ public class Force : MonoBehaviour {
             {
 				Vector3 point = hit.point;
                 //实例化出这个物体
-                Instantiate(particle, point, Quaternion.identity);
+                //Instantiate(particle, point, Quaternion.identity);
 
                 //Physics.OverlapSphere（）：球体投射，给定一个球心和半径，返回球体投射到的物体的碰撞器
                 Collider[] colliders = Physics.OverlapSphere(point, radius);

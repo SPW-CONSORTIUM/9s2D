@@ -6,14 +6,16 @@ public class RaySet : MonoBehaviour {
 
     public float LinesLong;
     public int LineCount;
-    public string Layer;
+
     public GameObject muBiaoObj;
     public float escMax;//目标丢失距离
 
+    public float m;//射线密度
+    public float h;//射线高度（重心到头顶间的位置）
 
-    public float m = 0.03f;//射线密度
-    public float h = 0.5f;//射线高度（重心到头顶间的位置）
-
+    public bool Player;
+    public bool Monster;
+    public bool NPC;
 
     private RaycastHit[] hit;
     private Ray[] ray;
@@ -74,11 +76,12 @@ public class RaySet : MonoBehaviour {
 
             if (hit[i].collider != null)
             {
-                if (hit[i].collider.gameObject.layer == LayerMask.NameToLayer(Layer))
-                {
+                if (hit[i].collider.gameObject.layer == LayerMask.NameToLayer("Player") && Player)
                     muBiaoObj = hit[i].collider.gameObject;
-                    
-                }
+                else if (hit[i].collider.gameObject.layer == LayerMask.NameToLayer("Monster") && Monster)
+                    muBiaoObj = hit[i].collider.gameObject;
+                else if (hit[i].collider.gameObject.layer == LayerMask.NameToLayer("NPC") && NPC)
+                    muBiaoObj = hit[i].collider.gameObject;
             }
 
 
